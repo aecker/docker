@@ -31,6 +31,9 @@ EXPOSE 22
 # Create the directory needed to run the sshd daemon
 RUN mkdir /var/run/sshd 
 
+# restarts the xdm service
+RUN /etc/init.d/xdm restart
+
 # Create groups
 RUN addgroup cin
 RUN groupmod -g 1011 cin
@@ -40,14 +43,13 @@ RUN groupmod -g 1019 bethgelab
 # Add user and generate a random password with 12 characters that includes at least one capital letter and number.
 ENV USER=aecker
 ENV USER_ID=1684
+ENV USER_HOME=/gpfs01/bethge/home/$USER
 # Password: aaC4h78nVbvQI
-ENV DOCKER_ENCRYPYTED_PASSWORD=aaMPY5OmkIlEI
-RUN useradd -m -d /home/$USER -p $DOCKER_ENCRYPYTED_PASSWORD $USER
+ENV USER_ENCRYPYTED_PASSWORD=aaMPY5OmkIlEI
+RUN useradd -M -d $USER_HOME -p $USER_ENCRYPYTED_PASSWORD $USER
 RUN usermod -u $USER_ID $USER
 
-# Not sure what this was needed for
-# sed -Ei "s/adm:x:4:/$USER:x:4:$USER/" /etc/group
-
+# Add user to groups
 RUN adduser $USER sudo
 RUN adduser $USER bethgelab
 RUN adduser $USER cin
@@ -56,13 +58,7 @@ RUN adduser $USER cin
 RUN chsh -s /bin/bash $USER
 
 # Copy the config files into the docker directory
-ADD .bethgelab /home/$USER/.bethgelab
-#RUN cd /tmp/.bethgelab && \
-#sudo -u $USER mkdir /home/$USER/.bethgelab && \
-#sudo -u $USER cp -R .[a-z]* [a-z]* /home/$USER/.bethgelab/
-
-# restarts the xdm service
-RUN /etc/init.d/xdm restart
+COPY bin/* /usr/local/bin/
 
 # Start the ssh service
 CMD /usr/sbin/sshd -D
