@@ -40,7 +40,7 @@ RUN groupmod -g 1011 cin
 RUN addgroup bethgelab
 RUN groupmod -g 1019 bethgelab
 
-# Add user and generate a random password with 12 characters that includes at least one capital letter and number.
+# Create user account
 ENV USER=aecker
 ENV USER_ID=1684
 ENV USER_HOME=/gpfs01/bethge/home/$USER
