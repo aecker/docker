@@ -98,4 +98,5 @@ RUN bash -c 'echo "export PATH=/opt/caffe/.build_release/tools:\$PATH" >> ~/.bas
 
 ENV PYTHONPATH /opt/caffe/python:$PYTHONPATH
 
-CMD ["/notebook.sh"]
+# Add Jupyter notebook to startup script
+RUN echo "/notebook.sh &" >> /usr/local/bin/startup

@@ -60,4 +60,4 @@ RUN chsh -s /bin/bash $USER
 COPY bin/* /usr/local/bin/
 
 # Start the ssh service
-CMD /usr/sbin/sshd -D
+CMD run

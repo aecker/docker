@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Start running porgrams and services
+startup
+
+# Do nothing forever, so container keeps running
+sleep inf
