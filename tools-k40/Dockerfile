@@ -8,10 +8,10 @@ MAINTAINER Alexander Ecker "alexander.ecker@uni-tuebingen.de"
 
 #install vim
 RUN apt-get update && apt-get install -y \
-    vim  \ 
     libedit-dev \
     python-opencv \
-    parallel 
+    parallel \
+    vim
 
 #install datajoint and dependencies
 RUN pip install --upgrade pip
@@ -25,8 +25,6 @@ RUN apt-get update && apt-get install -y ffmpeg
 
 #install theano and lasagne
 RUN pip2.7 install --upgrade pip
-RUN cd /opt && git clone https://github.com/Theano/Theano.git && \
-    cd /opt/Theano && python setup.py develop
 RUN pip2.7 install https://github.com/Lasagne/Lasagne/archive/master.zip
 
 #install tensorflow
@@ -47,6 +45,6 @@ RUN cd /tmp && \
     sudo ln -s `pwd`/liclipse/LiClipse /usr/bin/liclipse
 
 # Add Jupyter notebook to startup script
-RUN echo "sudo -u $USER ipython2 notebook --no-browser --port 8888 --ip=*" >> /usr/local/bin/startup
+RUN echo "sudo -u $USER jupyter notebook --ip=0.0.0.0 --no-browser" >> /usr/local/bin/startup
 
 WORKDIR $USER_HOME
