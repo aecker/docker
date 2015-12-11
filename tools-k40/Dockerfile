@@ -45,3 +45,8 @@ RUN cd /tmp && \
     sudo tar -xf /tmp/liclipse_2.4.0_linux.gtk.x86_64.tar.gz && \
     rm /tmp/liclipse_2.4.0_linux.gtk.x86_64.tar.gz && \
     sudo ln -s `pwd`/liclipse/LiClipse /usr/bin/liclipse
+
+# Add Jupyter notebook to startup script
+RUN echo "sudo -u $USER ipython2 notebook --no-browser --port 8888 --ip=*" >> /usr/local/bin/startup
+
+WORKDIR $USER_HOME
