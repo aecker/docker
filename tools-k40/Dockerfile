@@ -44,7 +44,9 @@ RUN cd /tmp && \
     rm /tmp/liclipse_2.4.0_linux.gtk.x86_64.tar.gz && \
     sudo ln -s `pwd`/liclipse/LiClipse /usr/bin/liclipse
 
+RUN pip2.7 install mpld3
+
 # Add Jupyter notebook to startup script
-RUN echo "sudo -u $USER jupyter notebook --ip=0.0.0.0 --no-browser" >> /usr/local/bin/startup
+RUN echo 'su -c "jupyter notebook --ip=0.0.0.0 --no-browser &" aecker' >> /usr/local/bin/startup
 
 WORKDIR $USER_HOME
