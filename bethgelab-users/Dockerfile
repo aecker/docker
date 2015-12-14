@@ -5,7 +5,7 @@
 # Alexander Ecker
 # 12/9/2015
 
-FROM scipyserver
+FROM wielandbrendel/jupyter-scipyserver
 MAINTAINER Alexander Ecker "alexander.ecker@uni-tuebingen.de"
 
 # Install X11, SSH and sudo
