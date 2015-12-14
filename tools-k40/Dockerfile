@@ -47,6 +47,6 @@ RUN cd /tmp && \
 RUN pip2.7 install mpld3
 
 # Add Jupyter notebook to startup script
-RUN echo 'su -c "jupyter notebook --ip=0.0.0.0 --no-browser &" aecker' >> /usr/local/bin/startup
+RUN echo "su -c 'jupyter notebook --ip=0.0.0.0 --no-browser &' $USER" >> /usr/local/bin/startup
 
 WORKDIR $USER_HOME
