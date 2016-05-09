@@ -1,5 +1,7 @@
 # docker
 
+**Outdated! Please use https://github.com/bethgelab/docker instead.**
+
 Alex' Docker tools. Build order:
 
 1. bethgelab-users
